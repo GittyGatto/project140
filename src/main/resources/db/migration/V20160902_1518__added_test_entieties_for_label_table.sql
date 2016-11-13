@@ -1,8 +1,8 @@
 insert into Label(label_text,label_date)
-values('Tütchen','1980-01-25');
+values('Example Label 1','2016-11-13');
 
 insert into Label(label_text,label_date)
-values('Bratpfanne','1976-03-16');
+values('Example Label 2','2016-11-14');
 
 insert into Label(label_text,label_date)
-values('Kotze','2012-04-21');
+values('Example Label 3','2016-11-15');

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html ng-app="LabelApp">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<title>Project140</title>
+</head>
+<body bgcolor="#E6E6FA">
+
+	<!--Header-->
+	<div class="container">
+		<div class="jumbotron">
+			<h1 align="right">Project140</h1>
+			<blockquote class="blockquote blockquote-reverse">
+				<p class="m-b-0">»Der Wein ist eingeschenkt, er muss getrunken
+					werden«</p>
+				<footer class="blockquote-footer">
+					Napoléon Bonaparte <cite title="Source Title">Juni, 1812</cite>
+				</footer>
+			</blockquote>
+		</div>
+	</div>
+
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-2">
+				<!-- Content -->
+			</div>
+
+			<div class="col-xl-2">
+
+				<!--NG-Cntr starts here-->
+				<div ng-controller="LabelController">
+
+					<p
+						ng-class="{'text-success' : !model.isError, 'text-danger' : model.isError }">
+						<span ng-if="model.isError">ERROR: </span> {{model.message}}
+					</p>
+
+					<p class="text-success">Thanks to Christian for his effort to
+						train this Author
+					<p>
+					<hr>
+
+
+					<!--Input Area-->
+					<h3>Add Label</h3>
+					<form class="form-inline">
+						<div class="form-group">
+							<label for="exampleInputName2">Label Text</label> <input
+								type="text" class="form-control" id="exampleInputName2"
+								ng-model="model.newLabelText">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail2">Date</label> <input type="date"
+								class="form-control" id="exampleInputEmail2"
+								ng-model="model.newLabelDate">
+						</div>
+						<button type="submit" class="btn btn-primary"
+							ng-click="addLabel()">Add Label</button>
+					</form>
+
+					<hr>
+
+					<!--Table-->
+					<div>
+						<h3>Table</h3>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>LabelText</th>
+									<th>LabelDate</th>
+									<th>Edit</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="label in model.labelsFromList | orderBy: 'labelId'">
+									<td>{{label.labelId}}</td>
+									<td>{{label.labelText}}</td>
+									<td>{{label.labelDate | date: 'dd-MM-yyyy' }}</td>
+									<td><button type="button" class="btn btn-danger"
+											ng-click="delLabel(label.labelId)">Exterminate</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<hr>
+
+					<!--Un-ordered List-->
+					<h3>All labels in unordered list</h3>
+					<div class="container">
+						<ul>
+							<li ng-repeat="label in model.labelsFromList | orderBy: 'labelId'">{{label.labelText}}
+								- {{label.labelDate | date: 'dd-MMMM-yyyy' }}</li>
+						</ul>
+					</div>
+
+
+					<!--Updatable List-->
+					<h3>Table - updatable</h3>
+					<div>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>LabelText</th>
+									<th>LabelDate</th>
+									<th>Edit</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									ng-repeat="label in model.labelsFromList | orderBy: 'labelId'">
+									<td>{{label.labelId}}</td>
+									<td><input ng-model="label.labelText" type="text"
+										value="{{label.labelText}}"></td>
+									
+									<td><input ng-model="label.labelDate" type="date"
+										value="{{label.labelDate }}"></td>
+									<td><button type="button" class="btn btn-danger"
+											ng-click="delLabel(label.labelId)">Exterminate</button>
+										<button type="button" class="btn btn-success"
+											ng-click="updateLabel(label)">Upgrade</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+			<div class="col-xl-8">
+				<!-- Content -->
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+	<script src="LabelApp.js"></script>
+	<script src="LabelController.js"></script>
+	<script src="LabelResource.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</body>
+</html>
